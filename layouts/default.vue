@@ -9,7 +9,7 @@
       </div>
       <div v-else>
           <p>您好，{{ username }}</p>
-        <button @click="logout">注销</button>
+        <button @click="logout">点击登出</button>
       </div>
     </nav>
 
