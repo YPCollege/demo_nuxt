@@ -1,37 +1,33 @@
 <template>
-  <div class="modal">
-    <form @submit.prevent="login">
-      <input v-model="username" placeholder="Username" required>
-      <input v-model="password" type="password" placeholder="Password" required>
-      <button type="submit">登录</button>
+  <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 bg-white shadow-md">
+    <form @submit.prevent="login" class="space-y-4">
+      <input v-model="username" placeholder="Username" required class="w-full p-2 border border-gray-300">
+      <input v-model="password" type="password" placeholder="Password" required class="w-full p-2 border border-gray-300">
+      <button @click="login" class="w-full p-2 bg-green-500 text-white">登录</button>
     </form>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
-  data() {
-    return {
-      username: '',
-      password: '',
+  setup(_, { emit }) {
+    const username = ref('');
+    const password = ref('');
+
+    const login = () => {
+      emit('login-success', username.value, password.value);
     };
-  },
-  methods: {
-    login() {
-      this.$emit('login-success', this.username);
-    },
+
+    return {
+      username,
+      password,
+      login,
+    };
   },
 };
 </script>
 
-<style scoped>
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  background-color: #fcfeff;
-  box-shadow: 0 0 10px rgba(117, 238, 199, 0.3);
-}
+<style>
 </style>
